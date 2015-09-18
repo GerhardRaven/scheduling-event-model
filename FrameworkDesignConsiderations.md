@@ -3,17 +3,17 @@
 The framework will have to work efficiently on many/multi core systems.
 Presumably, this will imply some level of concurrency. As a result, scheduling
 operations to be performed on the data will become more dynamic, and much
-more complex then our current serial case, where 'Algorithm's are statically
+more complex than our current serial case, where 'Algorithm's are statically
 scheduled, and the only dynamic aspects are the early abort of certain branches 
 of the graph of algorithms, and the skipping of Algorithms that have already 
-executed for the current event.
+been executed for the current event.
 
 As concurrent programming is non-trivial, the concurrency aspects should be hidden 
 as much as feasible from the implementation of the reconstruction and selection code,
-as these will be dominantly implemented by those who should not have to deal with 
+as these will be dominantly implemented by developers who should not have to deal with 
 the implementation details of the concurrency. A total isolation will most likely
 not be feasible, so guidelines should be formulated that will allow developers to write
-'concurrency friendly' code, i.e. code that does not misbehave when exectued as part 
+'concurrency friendly' code, i.e. code that does not misbehave when executed as part 
 of a concurrent system.
 
 To enable concurrency, the first hurdle seems to be the description of data dependencies
@@ -28,7 +28,7 @@ follow the same pattern: read data and then transform it new data, and then make
 data available in the TES. As such, one could consider writing one single generic algorithm
 which wraps this functionality (and thus provides a uniform pattern), and delegate the
 computational work. This suggests a new type of Gaudi component, which is explictly provided
-with input data, and explicitly provides output data -- lets define this as a Transform.. 
+with input data, and explicitly provides output data -- let's define this as a Transform.
 Note that there is no direct interaction between these Transform components and the TES -- this
 has been moved to higher level of abstraction. Note that one can further more imagine that
 these Transforms work on vectors of input, and provide vectors of output, allowing them to eg.
@@ -40,7 +40,7 @@ work on input from multiple events in a single invocation.
 
 # Concurrency Friendly
 In the above, we outlined that code should be written in a 'concurrency friendly' style.
-Here we detail want this entails:
+Here we detail what this entails:
 
 * no statics.
 * const interface.
